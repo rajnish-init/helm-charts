@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-apps
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - namespace: dev
+        valuesFile: values-dev.yaml
+      - namespace: stage
+        valuesFile: values-stage.yaml
+      - namespace: prod
+        valuesFile: values-prod.yaml
+  template:
+    metadata:
+      name: nginx-{{namespace}}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/<your-username>/helm-charts.git
+        targetRevision: main
+        path: nginx-chart
+        helm:
+          valueFiles:
+          - {{valuesFile}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: {{namespace}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
