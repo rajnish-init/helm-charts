@@ -6,14 +6,14 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - namespace: dev
-        valuesFile: values-dev.yaml
-      - namespace: stage
-        valuesFile: values-stage.yaml
-      - namespace: prod
-        valuesFile: values-prod.yaml
+    - list:
+        elements:
+          - namespace: dev
+            valuesFile: values-dev.yaml
+          - namespace: stage
+            valuesFile: values-stage.yaml
+          - namespace: prod
+            valuesFile: values-prod.yaml
   template:
     metadata:
       name: nginx-{{namespace}}
@@ -25,7 +25,7 @@ spec:
         path: nginx-chart
         helm:
           valueFiles:
-          - {{valuesFile}}
+            - {{valuesFile}}
       destination:
         server: https://kubernetes.default.svc
         namespace: {{namespace}}
