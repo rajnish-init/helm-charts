@@ -1,3 +1,4 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -19,7 +20,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/<your-username>/helm-charts.git
+        repoURL: https://github.com/rajnish-init/helm-charts.git
         targetRevision: main
         path: nginx-chart
         helm:
