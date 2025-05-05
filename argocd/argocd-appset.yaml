@@ -1,4 +1,3 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -25,11 +24,7 @@ spec:
         path: nginx-chart
         helm:
           valueFiles:
-            - {{valuesFile}}
+            - '{{valuesFile}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: {{namespace}}
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+        namespace: '{{namespace}}'
