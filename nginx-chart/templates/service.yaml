@@ -11,5 +11,6 @@ spec:
       targetPort: 80
       protocol: TCP
       name: http
-    selector:
-      {{- include "nginx-chart.selectorLabels" . | nindent 4 }}
+      
+  selector:
+    {{- include "nginx-chart.selectorLabels" . | nindent 4 }}
