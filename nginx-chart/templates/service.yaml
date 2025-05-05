@@ -11,6 +11,5 @@ spec:
       targetPort: 80
       protocol: TCP
       name: http
-      nodePort: {{ .Values.service.nodePort }}
-  selector:
-    {{- include "nginx-chart.selectorLabels" . | nindent 4 }}
+    selector:
+      {{- include "nginx-chart.selectorLabels" . | nindent 4 }}
