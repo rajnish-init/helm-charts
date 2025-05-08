@@ -1,0 +1,3 @@
+{{ - include "lib.deployment" (list . "barcode-scanner.deployment") -}}
+{{- define "barcode-scanner.deployment" -}}
+{{- end -}}
