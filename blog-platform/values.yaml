@@ -1,0 +1,72 @@
+# Default values for blog-platform.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: rajnish101/blog-platform
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets:
+  - name: regcred
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 5000
+
+# ingress:
+#   enabled: true
+#   className: "nginx"
+#   annotations:
+#     nginx.ingress.kubernetes.io/rewrite-target: /
+#   hosts:
+#     - host: blog.local
+#       paths:
+#         - path: "/blog"
+#           pathType: Prefix
+#   tls: []
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+aws:
+  credentials:
+    # Set to false to use an existing secret; set to true to create a new one.
+    create: false
+    # When using an existing secret, this must match its name.
+    name: aws-credentials
+  config:
+    create: true
+    name: aws-config
+    region: "us-east-1"
+
